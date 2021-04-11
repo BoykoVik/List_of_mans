@@ -6,9 +6,9 @@
 #include <QMessageBox>
 #include <QRegExp>
 
-QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-QSqlTableModel *model_count = new QSqlTableModel;
-QSqlTableModel *model_cursant = new QSqlTableModel;
+QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");//драйвер sqlite
+QSqlTableModel *model_count = new QSqlTableModel;//модель для стран
+QSqlTableModel *model_cursant = new QSqlTableModel;//модель для курсантов
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -20,8 +20,8 @@ Widget::Widget(QWidget *parent) :
      if (!db.open()){
          qDebug() << "Нет соединения с БД";
      }
-     query->exec("CREATE TABLE country (count VARCHAR PRIMARY KEY NOT NULL);");
-     qDebug() << query->exec("CREATE TABLE cursant ("
+     query->exec("CREATE TABLE country (count VARCHAR PRIMARY KEY NOT NULL);");//таблица для стран
+     query->exec("CREATE TABLE cursant ("//таблица для курсантов
                  "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
                  "fam VARCHAR NOT NULL,"
                  "name VARCHAR NOT NULL,"
@@ -41,8 +41,26 @@ Widget::Widget(QWidget *parent) :
      model_count->select();
      add_combo_country();
 
+     model_cursant->setTable("cursant");
+     ui->tableView_2->setModel(model_cursant);
+     ui->tableView_2->hideColumn(0);
+     model_cursant->setHeaderData(1, Qt::Horizontal, "Фамилия");
+     model_cursant->setHeaderData(2, Qt::Horizontal, "Имя");
+     model_cursant->setHeaderData(3, Qt::Horizontal, "Отчество");
+     model_cursant->setHeaderData(4, Qt::Horizontal, "Страна");
+     model_cursant->setHeaderData(5, Qt::Horizontal, "Данные визы");
+     model_cursant->setHeaderData(6, Qt::Horizontal, "Окончание визы");
+     model_cursant->setHeaderData(7, Qt::Horizontal, "Серия паспорта");
+     model_cursant->setHeaderData(8, Qt::Horizontal, "Номер паспорта");
+     model_cursant->setHeaderData(9, Qt::Horizontal, "Дата выдачи");
+     model_cursant->setHeaderData(10, Qt::Horizontal, "Действителен до");
+     model_cursant->select();
+     ui->tableView_2->setSortingEnabled(1);
+
      ui->pushButton_3->setEnabled(0);
      ui->pushButton->setEnabled(0);
+     ui->pushButton_4->setEnabled(0);
+     ui->pushButton_2->setEnabled(0);
 
      QRegExp R_date("(0[1-9]|[12][0-9]|3[01]).(0[1-9]|[1][0-2]).(19[0-9][0-9]|20[0-9][0-9])");
      QRegExpValidator *valida = new QRegExpValidator(R_date, this);
@@ -52,6 +70,8 @@ Widget::Widget(QWidget *parent) :
      ui->lineEdit_8->setPlaceholderText("Пример: 21.05.2019");
      ui->lineEdit_9->setValidator(valida);
      ui->lineEdit_9->setPlaceholderText("Пример: 21.05.2019");
+     QDate dat = QDate::currentDate();
+     qDebug() << dat.toString(Qt::SystemLocaleDate);
 }
 
 
@@ -186,4 +206,47 @@ void Widget::on_pushButton_clicked()
      msb.setButtonText(0, "OK");
      msb.warning(this, "Ошибка", "Ошибка ввода");
     }
+    model_cursant->select();
+}
+
+void Widget::on_pushButton_4_clicked()
+{
+    ui->tableView_2->model()->removeRow(ui->tableView_2->currentIndex().row());
+    ui->pushButton_4->setEnabled(0);
+    model_cursant->submitAll();
+    model_cursant->select();
+}
+
+void Widget::on_tableView_2_clicked(const QModelIndex &index)
+{
+    ui->pushButton_4->setEnabled(1);
+}
+
+void Widget::on_pushButton_5_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+void Widget::on_pushButton_6_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void Widget::on_pushButton_7_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void Widget::on_lineEdit_4_textChanged(const QString &arg1)
+{
+    if (arg1 != ""){
+        ui->pushButton_2->setEnabled(1);
+    } else {
+        ui->pushButton_2->setEnabled(0);
+    }
+}
+
+void Widget::on_pushButton_9_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
 }

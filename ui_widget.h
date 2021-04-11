@@ -30,6 +30,10 @@ class Ui_Widget
 public:
     QGridLayout *gridLayout;
     QStackedWidget *stackedWidget;
+    QWidget *page_3;
+    QPushButton *pushButton_6;
+    QPushButton *pushButton_7;
+    QPushButton *pushButton_8;
     QWidget *page;
     QLineEdit *lineEdit;
     QLineEdit *lineEdit_2;
@@ -58,8 +62,11 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
+    QPushButton *pushButton_9;
     QWidget *page_2;
     QTableView *tableView_2;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_5;
 
     void setupUi(QWidget *Widget)
     {
@@ -72,6 +79,18 @@ public:
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         stackedWidget = new QStackedWidget(Widget);
         stackedWidget->setObjectName(QStringLiteral("stackedWidget"));
+        page_3 = new QWidget();
+        page_3->setObjectName(QStringLiteral("page_3"));
+        pushButton_6 = new QPushButton(page_3);
+        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
+        pushButton_6->setGeometry(QRect(130, 60, 75, 23));
+        pushButton_7 = new QPushButton(page_3);
+        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
+        pushButton_7->setGeometry(QRect(130, 90, 75, 23));
+        pushButton_8 = new QPushButton(page_3);
+        pushButton_8->setObjectName(QStringLiteral("pushButton_8"));
+        pushButton_8->setGeometry(QRect(130, 120, 75, 23));
+        stackedWidget->addWidget(page_3);
         page = new QWidget();
         page->setObjectName(QStringLiteral("page"));
         lineEdit = new QLineEdit(page);
@@ -155,12 +174,21 @@ public:
         pushButton_3 = new QPushButton(page);
         pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
         pushButton_3->setGeometry(QRect(620, 380, 75, 23));
+        pushButton_9 = new QPushButton(page);
+        pushButton_9->setObjectName(QStringLiteral("pushButton_9"));
+        pushButton_9->setGeometry(QRect(30, 460, 75, 23));
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName(QStringLiteral("page_2"));
         tableView_2 = new QTableView(page_2);
         tableView_2->setObjectName(QStringLiteral("tableView_2"));
         tableView_2->setGeometry(QRect(20, 20, 661, 431));
+        pushButton_4 = new QPushButton(page_2);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setGeometry(QRect(600, 460, 75, 23));
+        pushButton_5 = new QPushButton(page_2);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        pushButton_5->setGeometry(QRect(40, 460, 75, 23));
         stackedWidget->addWidget(page_2);
 
         gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
@@ -168,7 +196,7 @@ public:
 
         retranslateUi(Widget);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(Widget);
@@ -177,6 +205,9 @@ public:
     void retranslateUi(QWidget *Widget)
     {
         Widget->setWindowTitle(QApplication::translate("Widget", "Widget", Q_NULLPTR));
+        pushButton_6->setText(QApplication::translate("Widget", "\320\224\320\276\320\261\320\260\320\262\320\273\320\265\320\275\320\270\320\265", Q_NULLPTR));
+        pushButton_7->setText(QApplication::translate("Widget", "\320\222\320\265\321\201\321\214 \321\201\320\277\320\270\321\201\320\276\320\272", Q_NULLPTR));
+        pushButton_8->setText(QApplication::translate("Widget", "\320\222\320\265\321\201\321\214 \321\201\320\277\320\270\321\201\320\276\320\272", Q_NULLPTR));
         label->setText(QApplication::translate("Widget", "\320\244\320\260\320\274\320\270\320\273\320\270\321\217", Q_NULLPTR));
         label_2->setText(QApplication::translate("Widget", "\320\230\320\274\321\217", Q_NULLPTR));
         label_3->setText(QApplication::translate("Widget", "\320\236\321\202\321\207\320\265\321\201\321\202\320\262\320\276", Q_NULLPTR));
@@ -192,6 +223,9 @@ public:
         pushButton->setText(QApplication::translate("Widget", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("Widget", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214", Q_NULLPTR));
         pushButton_3->setText(QApplication::translate("Widget", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", Q_NULLPTR));
+        pushButton_9->setText(QApplication::translate("Widget", "\320\235\320\260\320\267\320\260\320\264", Q_NULLPTR));
+        pushButton_4->setText(QApplication::translate("Widget", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214", Q_NULLPTR));
+        pushButton_5->setText(QApplication::translate("Widget", "\320\235\320\260\320\267\320\260\320\264", Q_NULLPTR));
     } // retranslateUi
 
 };

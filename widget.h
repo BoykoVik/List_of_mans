@@ -48,6 +48,20 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_4_clicked();
+
+    void on_tableView_2_clicked(const QModelIndex &index);
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_7_clicked();
+
+    void on_lineEdit_4_textChanged(const QString &arg1);
+
+    void on_pushButton_9_clicked();
+
 private:
     Ui::Widget *ui;
     QSqlTableModel *model_rashod = new QSqlTableModel;
