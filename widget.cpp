@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QRegExp>
+#include <QTableWidgetItem>
 
 QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");//драйвер sqlite
 QSqlTableModel *model_count = new QSqlTableModel;//модель для стран
@@ -70,8 +71,9 @@ Widget::Widget(QWidget *parent) :
      ui->lineEdit_8->setPlaceholderText("Пример: 21.05.2019");
      ui->lineEdit_9->setValidator(valida);
      ui->lineEdit_9->setPlaceholderText("Пример: 21.05.2019");
-     QDate dat = QDate::currentDate();
-     qDebug() << dat.toString(Qt::SystemLocaleDate);
+
+     add_on_tableview();
+
 }
 
 
@@ -102,6 +104,28 @@ void Widget::add_btn_on()
     } else {
         ui->pushButton->setEnabled(0);
     }
+}
+
+void Widget::add_on_tableview()
+{
+    ui->tableWidget->setRowCount(0);
+    int stroki = ui->tableView_2->model()->rowCount();
+    QDate cd = QDate::currentDate();
+    int spin = ui->spinBox->value();
+    for (int i = 0; i < stroki; i++){
+        QDate date_str = QDate::fromString(ui->tableView_2->model()->data(ui->tableView_2->model()->index(i, 6)).toString(), "dd.MM.yyyy");
+        int dayz = cd.daysTo(date_str);
+        if(dayz <= spin){
+            ui->tableWidget->setRowCount(ui->tableWidget->rowCount()+1);
+            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 0, new QTableWidgetItem(ui->tableView_2->model()->data(ui->tableView_2->model()->index(i, 1)).toString()));
+            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 1, new QTableWidgetItem(ui->tableView_2->model()->data(ui->tableView_2->model()->index(i, 2)).toString()));
+            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 2, new QTableWidgetItem(ui->tableView_2->model()->data(ui->tableView_2->model()->index(i, 3)).toString()));
+            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 3, new QTableWidgetItem(QString::number(dayz)));
+            ui->tableWidget->setItem(ui->tableWidget->rowCount()-1, 4, new QTableWidgetItem(ui->tableView_2->model()->data(ui->tableView_2->model()->index(i, 4)).toString()));
+        }
+    }
+    ui->tableWidget->sortByColumn(3);
+
 }
 
 Widget::~Widget()
@@ -207,6 +231,17 @@ void Widget::on_pushButton_clicked()
      msb.warning(this, "Ошибка", "Ошибка ввода");
     }
     model_cursant->select();
+
+    ui->lineEdit->clear();
+    ui->lineEdit_2->clear();
+    ui->lineEdit_3->clear();
+    ui->comboBox->setCurrentIndex(0);
+    ui->lineEdit_5->clear();
+    ui->lineEdit_6->clear();
+    ui->lineEdit_7->clear();
+    ui->lineEdit_10->clear();
+    ui->lineEdit_8->clear();
+    ui->lineEdit_9->clear();
 }
 
 void Widget::on_pushButton_4_clicked()
@@ -217,13 +252,14 @@ void Widget::on_pushButton_4_clicked()
     model_cursant->select();
 }
 
-void Widget::on_tableView_2_clicked(const QModelIndex &index)
+void Widget::on_tableView_2_clicked()
 {
     ui->pushButton_4->setEnabled(1);
 }
 
 void Widget::on_pushButton_5_clicked()
 {
+    model_cursant->submitAll();
     ui->stackedWidget->setCurrentIndex(0);
 }
 
@@ -249,4 +285,19 @@ void Widget::on_lineEdit_4_textChanged(const QString &arg1)
 void Widget::on_pushButton_9_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+}
+
+void Widget::on_pushButton_8_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+void Widget::on_pushButton_10_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+void Widget::on_spinBox_valueChanged()
+{
+    add_on_tableview();
 }

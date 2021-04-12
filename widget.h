@@ -20,8 +20,9 @@ public:
 
 
 private slots:
-    void add_combo_country();
+    void add_combo_country();//добавить страну в комбобокс
     void add_btn_on();
+    void add_on_tableview();//добавить в таблицу ближайших
     void on_pushButton_2_clicked();
 
     void on_pushButton_3_clicked();
@@ -50,7 +51,7 @@ private slots:
 
     void on_pushButton_4_clicked();
 
-    void on_tableView_2_clicked(const QModelIndex &index);
+    void on_tableView_2_clicked();
 
     void on_pushButton_5_clicked();
 
@@ -62,9 +63,14 @@ private slots:
 
     void on_pushButton_9_clicked();
 
+    void on_pushButton_8_clicked();
+
+    void on_pushButton_10_clicked();
+
+    void on_spinBox_valueChanged();
+
 private:
     Ui::Widget *ui;
-    QSqlTableModel *model_rashod = new QSqlTableModel;
 };
 
 #endif // WIDGET_H

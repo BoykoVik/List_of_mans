@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ico/130874.png</file>
+        <file>ico/14458160321582004493-128.png</file>
+        <file>ico/14822068641558424397-128.png</file>
+        <file>ico/icons8-user-male-120.png</file>
+        <file>ico/130905.png</file>
+        <file>ico/9349830101558424430-128.png</file>
+        <file>ico/icons8-tinder-120.png</file>
+    </qresource>
+</RCC>
