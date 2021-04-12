@@ -250,6 +250,7 @@ void Widget::on_pushButton_4_clicked()
     ui->pushButton_4->setEnabled(0);
     model_cursant->submitAll();
     model_cursant->select();
+    add_on_tableview();
 }
 
 void Widget::on_tableView_2_clicked()
