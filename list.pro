@@ -6,6 +6,11 @@
 
 QT       += core gui sql
 
+VERSION = 1.0
+QMAKE_TARGET_COMPANY = Viktor Boyko
+QMAKE_TARGET_PRODUCT = List
+QMAKE_TARGET_COPYRIGHT = gexar47@gmail.com
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = list
@@ -41,3 +46,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     res.qrc
+RC_ICONS = list.ico
